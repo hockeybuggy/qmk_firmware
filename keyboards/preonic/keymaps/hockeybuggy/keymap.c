@@ -21,7 +21,7 @@ enum preonic_layers {
   _QWERTY,
   _LOWER,
   _RAISE,
-  _ADJUST
+  _ADJUST,
 };
 
 enum preonic_keycodes {
@@ -40,6 +40,9 @@ enum preonic_keycodes {
   EM_THUMBS_UP, // 👍
   EM_THUMBS_DOWN, // 👎
   EM_METAL, // 🤘
+
+  MACRO_EM_KEYBOARD, // Open the emoji keyboard on mac
+  MACRO_LGTM, // My Pull request approval message.
 };
 
 
@@ -73,19 +76,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+-------------+------+------+------+------+------|
  * |   `  |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  |  \   |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * |      |Smile |Laugh |Think |TmbsUp|Metal |      |   _  |   +  |   {  |   }  |  |   |
+ * |      |Smile |Laugh |Think |TmbsUp|Metal |Emoji |   _  |   +  |   {  |   }  |  |   |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |      |Frown | Sad  |Spark |TmbsDn| Fire |      |      |      | Home | End  |      |
+ * |      |Frown | Sad  |Spark |TmbsDn| Fire | LGTM |      |      | Home | End  |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |      |      |      |      |             |      | Next | Vol- | Vol+ | Play |
  * `----------------------------------------------------------------------------------'
  */
 [_LOWER] = {
-  {KC_TILD, KC_EXLM,  KC_AT,    KC_HASH,     KC_DLR,         KC_PERC,    KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_DEL},
-  {KC_GRV,  KC_1,     KC_2,     KC_3,        KC_4,           KC_5,       KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSLS},
-  {_______, EM_SMILE, EM_LAUGH, EM_THINKING, EM_THUMBS_UP,   EM_METAL, _______, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, KC_PIPE},
-  {_______, EM_FROWN, EM_SAD,   EM_SPARKLES,  EM_THUMBS_DOWN, EM_FIRE,    _______, _______, _______, KC_HOME, KC_END,  _______},
-  {_______, _______,  _______,  _______,     _______,        _______,    _______, _______, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY}
+  {KC_TILD, KC_EXLM,  KC_AT,    KC_HASH,     KC_DLR,         KC_PERC,    KC_CIRC,           KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_DEL},
+  {KC_GRV,  KC_1,     KC_2,     KC_3,        KC_4,           KC_5,       KC_6,              KC_7,    KC_8,    KC_9,    KC_0,    KC_BSLS},
+  {_______, EM_SMILE, EM_LAUGH, EM_THINKING, EM_THUMBS_UP,   EM_METAL,   MACRO_EM_KEYBOARD, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, KC_PIPE},
+  {_______, EM_FROWN, EM_SAD,   EM_SPARKLES, EM_THUMBS_DOWN, EM_FIRE,    MACRO_LGTM,        _______, _______, KC_HOME, KC_END,  _______},
+  {_______, _______,  _______,  _______,     _______,        _______,    _______,           _______, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY}
 },
 
 /* Raise
@@ -206,6 +209,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             return false;
           case EM_METAL:
             SEND_STRING(":metal:");
+            return false;
+
+          case MACRO_EM_KEYBOARD:
+            /* SEND_STRING(SS_DOWN(X_LGUI)SS_DOWN(X_LCTRL)" "SS_UP(X_LGUI)SS_UP(X_LCTRL)); */
+            return false;
+          case MACRO_LGTM:
+            SEND_STRING(":thumbsup: Looks good to me :sparkles:");
             return false;
         }
       }
