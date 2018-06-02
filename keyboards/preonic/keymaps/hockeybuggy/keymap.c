@@ -28,36 +28,20 @@ enum preonic_keycodes {
   QWERTY = SAFE_RANGE,
   LOWER,
   RAISE,
-  BACKLIT
-};
-
-
-enum unicode_name {
-  EM_SMILE = 1, // 🙂
-  EM_FROWN, // 🙁
+  BACKLIT,
+  EM_SMILE, // 🙂
+  EM_FROWN, // 😔
   EM_LAUGH, // 😂
   EM_SAD, // 😞
   EM_THINKING, // 🤔
 
   EM_FIRE, // 🔥
-  EM_SPARKES, // ✨
+  EM_SPARKLES, // ✨
   EM_THUMBS_UP, // 👍
   EM_THUMBS_DOWN, // 👎
-  EM_CURLING, // 🥌
+  EM_METAL, // 🤘
 };
 
-const uint32_t PROGMEM unicode_map[] = {
-    [EM_SMILE]   = 0x1F642,
-    [EM_FROWN]   = 0x1F641,
-    [EM_LAUGH]   = 0x1F602,
-    [EM_SAD]     = 0x1F61E,
-    [EM_THINKING] = 0x1F914,
-    [EM_FIRE]    = 0x1F525,
-    [EM_SPARKES] = 0x2728,
-    [EM_THUMBS_UP] = 0x1F44D,
-    [EM_THUMBS_DOWN] = 0x1F44E,
-    [EM_CURLING] = 0x1F94C,
-};
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -87,28 +71,28 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------------------------------------------------.
  * |   ~  |   !  |   @  |   #  |   $  |   %  |   ^  |   &  |   *  |   (  |   )  | Del  |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * |   ~  |   !  |   @  |   #  |   $  |   %  |   ^  |   &  |   *  |   (  |   )  |  \   |
+ * |   `  |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  |  \   |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * |      |  🙂  |  😂  |  🤔  |  👍  |  ✨  |      |   _  |   +  |   {  |   }  |  |   |
+ * |      |Smile |Laugh |Think |TmbsUp|Metal |      |   _  |   +  |   {  |   }  |  |   |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |      |  🙁  |  😞  |  🥌  |  👎  |  🔥  |      |      |      | Home | End  |      |
+ * |      |Frown | Sad  |Spark |TmbsDn| Fire |      |      |      | Home | End  |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |      |      |      |      |             |      | Next | Vol- | Vol+ | Play |
- * `-----------------------------------------------------------------------------------'
+ * `----------------------------------------------------------------------------------'
  */
 [_LOWER] = {
-  {KC_TILD, KC_EXLM,     KC_AT,       KC_HASH,        KC_DLR,            KC_PERC,       KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_DEL},
-  {KC_TILD, KC_EXLM,     KC_AT,       KC_HASH,        KC_DLR,            KC_PERC,       KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_BSLS},
-  {_______, X(EM_SMILE), X(EM_LAUGH), X(EM_THINKING), X(EM_THUMBS_UP),   X(EM_SPARKES), _______, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, KC_PIPE},
-  {_______, X(EM_FROWN), X(EM_SAD),   X(EM_CURLING),  X(EM_THUMBS_DOWN), X(EM_FIRE),    _______, _______, _______, KC_HOME, KC_END,  _______},
-  {_______, _______,     _______,     _______,        _______,           _______,       _______, _______, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY}
+  {KC_TILD, KC_EXLM,  KC_AT,    KC_HASH,     KC_DLR,         KC_PERC,    KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_DEL},
+  {KC_GRV,  KC_1,     KC_2,     KC_3,        KC_4,           KC_5,       KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSLS},
+  {_______, EM_SMILE, EM_LAUGH, EM_THINKING, EM_THUMBS_UP,   EM_METAL, _______, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, KC_PIPE},
+  {_______, EM_FROWN, EM_SAD,   EM_SPARKLES,  EM_THUMBS_DOWN, EM_FIRE,    _______, _______, _______, KC_HOME, KC_END,  _______},
+  {_______, _______,  _______,  _______,     _______,        _______,    _______, _______, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY}
 },
 
 /* Raise
  * ,-----------------------------------------------------------------------------------.
  * |   `  |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  | Del  |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |   `  |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  |  \   |
+ * |   ~  |   !  |   @  |   #  |   $  |   %  |   ^  |   &  |   *  |   (  |   )  |  \   |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
  * |      |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |   -  |   =  |   [  |   ]  |  \   |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
@@ -119,7 +103,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_RAISE] = {
   {KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_DEL},
-  {KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSLS},
+  {KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_BSLS},
   {_______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, KC_BSLS},
   {_______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  _______, _______, KC_PGUP, KC_PGDN, _______},
   {_______, _______, _______, _______, _______, _______, _______, _______, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY}
@@ -190,6 +174,40 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           }
           return false;
           break;
+      }
+      if (record->event.pressed) {
+        switch (keycode) {
+          case EM_SMILE:
+            SEND_STRING(":smile:");
+            return false;
+          case EM_FROWN:
+            SEND_STRING(":pensive:");
+            return false;
+          case EM_LAUGH:
+            SEND_STRING(":joy:");
+            return false;
+          case EM_SAD:
+            SEND_STRING(":disappointed:");
+            return false;
+          case EM_THINKING:
+            SEND_STRING(":thinking:");
+            return false;
+          case EM_FIRE:
+            SEND_STRING(":fire:");
+            return false;
+          case EM_SPARKLES:
+            SEND_STRING(":sparkles:");
+            return false;
+          case EM_THUMBS_UP:
+            SEND_STRING(":thumbsup:");
+            return false;
+          case EM_THUMBS_DOWN:
+            SEND_STRING(":thumbsdown:");
+            return false;
+          case EM_METAL:
+            SEND_STRING(":metal:");
+            return false;
+        }
       }
     return true;
 };
