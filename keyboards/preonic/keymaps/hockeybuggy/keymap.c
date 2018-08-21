@@ -193,7 +193,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             SEND_STRING(":disappointed:");
             return false;
           case EM_THINKING:
-            SEND_STRING(":thinking:");
+            SEND_STRING(":thinking_face:");
             return false;
           case EM_FIRE:
             SEND_STRING(":fire:");
