@@ -1,2 +1,1 @@
-UNICODE_ENABLE = no
-UNICODEMAP_ENABLE = yes
+SRC += muse.c
