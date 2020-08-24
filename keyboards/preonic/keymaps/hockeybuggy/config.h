@@ -40,3 +40,6 @@
 //#define MIDI_TONE_KEYCODE_OCTAVES 2
 
 #endif
+
+#define COMBO_COUNT 10
+#define COMBO_TERM 40
