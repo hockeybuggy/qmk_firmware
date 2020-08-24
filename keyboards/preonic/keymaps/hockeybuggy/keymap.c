@@ -28,7 +28,6 @@ enum preonic_keycodes {
   QWERTY = SAFE_RANGE,
   LOWER,
   RAISE,
-  BACKLIT,
 
   EM_SMILE, // 🙂
   EM_FROWN, // 😔
@@ -162,24 +161,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             layer_off(_RAISE);
             update_tri_layer(_LOWER, _RAISE, _ADJUST);
           }
-          return false;
-          break;
-        case BACKLIT:
-          if (record->event.pressed) {
-            register_code(KC_RSFT);
-            #ifdef BACKLIGHT_ENABLE
-              backlight_step();
-            #endif
-            #ifdef __AVR__
-            PORTE &= ~(1<<6);
-            #endif
-          } else {
-            unregister_code(KC_RSFT);
-            #ifdef __AVR__
-            PORTE |= (1<<6);
-            #endif
-          }
-
           return false;
           break;
       }
