@@ -76,5 +76,9 @@ layers. I didn't like having my thumbs do different things, but at the time I
 didn't create a keymap so I didn't change it.
 
 ```
-make ergodox_infinity:defauilt
+# With left half plugged in:
+make ergodox_infinity:defauilt:dfu-util
+
+# With right half plugged in:
+make ergodox_infinity:defauilt:dfu-util MASTER=right
 ```
