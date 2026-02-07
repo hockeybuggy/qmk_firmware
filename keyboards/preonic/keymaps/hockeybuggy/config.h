@@ -37,7 +37,10 @@
 /* override number of MIDI tone keycodes (each octave adds 12 keycodes and allocates 12 bytes) */
 //#define MIDI_TONE_KEYCODE_OCTAVES 2
 
-#endif
+// Unicode input mode configuration for emoji support
+#define UNICODE_SELECTED_MODES UNICODE_MODE_MACOS, UNICODE_MODE_LINUX, UNICODE_MODE_WINCOMPOSE
 
 #define COMBO_COUNT 10
 #define COMBO_TERM 40
+
+#endif
