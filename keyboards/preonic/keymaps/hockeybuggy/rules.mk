@@ -1,4 +1,3 @@
 SRC += muse.c
 
-COMBO_ENABLE = yes
 UNICODEMAP_ENABLE = yes
