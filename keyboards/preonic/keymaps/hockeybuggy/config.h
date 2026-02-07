@@ -37,6 +37,10 @@
 /* override number of MIDI tone keycodes (each octave adds 12 keycodes and allocates 12 bytes) */
 //#define MIDI_TONE_KEYCODE_OCTAVES 2
 
+// Mod-Tap configuration for more responsive Esc/Ctrl key
+#define TAPPING_TERM 175  // Reduce from default 200ms for faster response
+#define PERMISSIVE_HOLD   // Treat as hold if another key is pressed while holding
+
 // Unicode input mode configuration for emoji support
 #define UNICODE_SELECTED_MODES UNICODE_MODE_MACOS, UNICODE_MODE_LINUX, UNICODE_MODE_WINCOMPOSE
 
