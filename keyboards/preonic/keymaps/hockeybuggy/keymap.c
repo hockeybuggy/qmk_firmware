@@ -33,32 +33,18 @@ enum preonic_keycodes {
 
   EM_DASH, // —
   EN_DASH, // –
-};
 
-enum unicode_names {
-  EMOJI_SMILE,       // 🙂
-  EMOJI_FROWN,       // 😔
-  EMOJI_LAUGH,       // 😂
-  EMOJI_SAD,         // 😞
-  EMOJI_THINKING,    // 🤔
-  EMOJI_FIRE,        // 🔥
-  EMOJI_SPARKLES,    // ✨
-  EMOJI_THUMBS_UP,   // 👍
-  EMOJI_THUMBS_DOWN, // 👎
-  EMOJI_METAL,       // 🤘
-};
-
-const uint32_t PROGMEM unicode_map[] = {
-  [EMOJI_SMILE]       = 0x1F642,  // 🙂
-  [EMOJI_FROWN]       = 0x1F614,  // 😔
-  [EMOJI_LAUGH]       = 0x1F602,  // 😂
-  [EMOJI_SAD]         = 0x1F61E,  // 😞
-  [EMOJI_THINKING]    = 0x1F914,  // 🤔
-  [EMOJI_FIRE]        = 0x1F525,  // 🔥
-  [EMOJI_SPARKLES]    = 0x2728,   // ✨
-  [EMOJI_THUMBS_UP]   = 0x1F44D,  // 👍
-  [EMOJI_THUMBS_DOWN] = 0x1F44E,  // 👎
-  [EMOJI_METAL]       = 0x1F918,  // 🤘
+  // Emoji shortcuts
+  EMOJI_SMILE,       // :smile: → 🙂
+  EMOJI_FROWN,       // :frown: → 😔
+  EMOJI_LAUGH,       // :laugh: → 😂
+  EMOJI_SAD,         // :sad: → 😞
+  EMOJI_THINKING,    // :thinking: → 🤔
+  EMOJI_FIRE,        // :fire: → 🔥
+  EMOJI_SPARKLES,    // :sparkles: → ✨
+  EMOJI_THUMBS_UP,   // :thumbsup: → 👍
+  EMOJI_THUMBS_DOWN, // :thumbsdown: → 👎
+  EMOJI_METAL,       // :metal: → 🤘
 };
 
 
@@ -101,11 +87,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `----------------------------------------------------------------------------------'
  */
 [_LOWER] = LAYOUT_preonic_grid( \
-  KC_GRV,  KC_F1,             KC_F2,           KC_F3,              KC_F4,                 KC_F5,            KC_F6,      KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_DEL,  \
-  _______, KC_1,              KC_2,            KC_3,               KC_4,                  KC_5,             KC_6,       KC_7,    KC_8,    KC_9,    KC_0,    _______, \
-  _______, UM(EMOJI_SMILE),   UM(EMOJI_LAUGH), UM(EMOJI_THINKING), UM(EMOJI_THUMBS_UP),   UM(EMOJI_METAL),  EM_DASH,    KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, _______, \
-  _______, UM(EMOJI_FROWN),   UM(EMOJI_SAD),   UM(EMOJI_SPARKLES), UM(EMOJI_THUMBS_DOWN), UM(EMOJI_FIRE),   MACRO_LGTM, _______, _______, KC_HOME, KC_END,  _______, \
-  _______, _______,           _______,         _______,            _______,               _______,          _______,    _______, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY \
+  KC_GRV,  KC_F1,         KC_F2,         KC_F3,          KC_F4,          KC_F5,         KC_F6,      KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_DEL,  \
+  _______, KC_1,          KC_2,          KC_3,           KC_4,           KC_5,          KC_6,       KC_7,    KC_8,    KC_9,    KC_0,    _______, \
+  _______, EMOJI_SMILE,   EMOJI_LAUGH,   EMOJI_THINKING, EMOJI_THUMBS_UP, EMOJI_METAL,  EM_DASH,    KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, _______, \
+  _______, EMOJI_FROWN,   EMOJI_SAD,     EMOJI_SPARKLES, EMOJI_THUMBS_DOWN, EMOJI_FIRE, MACRO_LGTM, _______, _______, KC_HOME, KC_END,  _______, \
+  _______, _______,       _______,       _______,        _______,        _______,       _______,    _______, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY \
 ),
 
 /* Raise
@@ -195,6 +181,47 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
           case EN_DASH:
             send_unicode_string("–");
+            return false;
+
+          // Emoji text shortcuts (requires macOS text replacements)
+          case EMOJI_SMILE:
+            SEND_STRING(":smile:");
+            return false;
+
+          case EMOJI_FROWN:
+            SEND_STRING(":frown:");
+            return false;
+
+          case EMOJI_LAUGH:
+            SEND_STRING(":laugh:");
+            return false;
+
+          case EMOJI_SAD:
+            SEND_STRING(":sad:");
+            return false;
+
+          case EMOJI_THINKING:
+            SEND_STRING(":thinking:");
+            return false;
+
+          case EMOJI_FIRE:
+            SEND_STRING(":fire:");
+            return false;
+
+          case EMOJI_SPARKLES:
+            SEND_STRING(":sparkles:");
+            return false;
+
+          case EMOJI_THUMBS_UP:
+            SEND_STRING(":thumbsup:");
+            return false;
+
+          case EMOJI_THUMBS_DOWN:
+            SEND_STRING(":thumbsdown:");
+            return false;
+
+          case EMOJI_METAL:
+            SEND_STRING(":metal:");
             return false;
         }
       }
